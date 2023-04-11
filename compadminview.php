@@ -1,0 +1,19 @@
+<?php
+include_once"settings/settings.php";
+include_once"classes/userclass.php";
+$obj=new userclass();
+session_start();
+if(isset($_COOKIE['logined'])&&$_COOKIE['logined']==1)
+{
+	$key=$_COOKIE['lkey'];
+	$c=$obj->comview();
+	$smartyObj->assign("views",$c);
+	$smartyObj->display('adminheader.tpl');
+	$smartyObj->display('compadminview.tpl');
+	$smartyObj->display('adminfooter.tpl');
+}
+else
+{
+	Header("location:login.php");
+}
+?>
